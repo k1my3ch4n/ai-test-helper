@@ -25,11 +25,11 @@ GitHub Actions를 이용하여 AI 기반 테스트 코드 작성을 자동화하
   - [x] 테스트 코드 자동 생성
   - [x] 생성된 코드 검증
 
-### Phase 3: GitHub Actions 통합
-- [ ] GitHub Action 정의 파일 작성 (action.yml)
-- [ ] Action 입력/출력 파라미터 설계
-- [ ] Workflow 예제 작성
-- [ ] Marketplace 배포 준비
+### Phase 3: GitHub Actions 통합 ✅ 완료
+- [x] GitHub Action 정의 파일 작성 (action.yml)
+- [x] Action 입력/출력 파라미터 설계
+- [x] Workflow 예제 작성
+- [x] Marketplace 배포 준비
 
 ### Phase 4: 테스트 및 문서화
 - [ ] 단위 테스트 작성
@@ -46,33 +46,42 @@ GitHub Actions를 이용하여 AI 기반 테스트 코드 작성을 자동화하
 | 패키지 매니저 | npm | Node.js 기본 패키지 매니저, 안정성 |
 | 테스트 프레임워크 | Jest | TypeScript 지원, 풍부한 기능 |
 | 린터 | ESLint + Prettier | 코드 품질 및 일관성 유지 |
+| 번들러 | @vercel/ncc | GitHub Actions용 단일 파일 번들링 |
 
 ## 프로젝트 구조
 
 ```
 ai-test-helper/
+├── .github/
+│   └── workflows/
+│       ├── ci.yml                # CI 워크플로우
+│       ├── release.yml           # 릴리스 워크플로우
+│       ├── example-usage.yml     # 사용 예제 (Claude)
+│       └── example-gemini.yml    # 사용 예제 (Gemini)
 ├── src/
-│   ├── index.ts              # 메인 엔트리포인트
+│   ├── index.ts                  # 메인 엔트리포인트
 │   ├── api/
-│   │   ├── index.ts          # API 모듈 export
-│   │   ├── types.ts          # 공통 타입 정의
-│   │   ├── claude.ts         # Claude API 클라이언트
-│   │   └── gemini.ts         # Gemini API 클라이언트
+│   │   ├── index.ts              # API 모듈 export
+│   │   ├── types.ts              # 공통 타입 정의
+│   │   ├── claude.ts             # Claude API 클라이언트
+│   │   └── gemini.ts             # Gemini API 클라이언트
 │   ├── git/
-│   │   ├── index.ts          # Git 모듈 export
-│   │   ├── types.ts          # Git 타입 정의
-│   │   └── analyzer.ts       # Git 분석기
+│   │   ├── index.ts              # Git 모듈 export
+│   │   ├── types.ts              # Git 타입 정의
+│   │   └── analyzer.ts           # Git 분석기
 │   └── generator/
-│       ├── index.ts          # Generator 모듈 export
-│       ├── types.ts          # Generator 타입 정의
-│       └── test-generator.ts # 테스트 생성기
-├── tests/                    # 테스트 파일
-├── dist/                     # 빌드 출력
-├── action.yml                # GitHub Action 정의
+│       ├── index.ts              # Generator 모듈 export
+│       ├── types.ts              # Generator 타입 정의
+│       └── test-generator.ts     # 테스트 생성기
+├── tests/                        # 테스트 파일
+├── dist/                         # 빌드 출력 (ncc 번들)
+├── action.yml                    # GitHub Action 정의
 ├── package.json
 ├── tsconfig.json
 ├── .eslintrc.js
-└── .prettierrc
+├── .prettierrc
+├── LICENSE
+└── CONTRIBUTING.md
 ```
 
 ## 구현된 기능
@@ -93,11 +102,29 @@ ai-test-helper/
 - 테스트 제안 생성
 - 테스트 코드 자동 생성 및 저장
 
+### GitHub Actions 통합
+- **action.yml**: Action 정의 (inputs/outputs)
+- **ncc 번들링**: 단일 파일로 번들링
+- **워크플로우 예제**: Claude/Gemini 사용 예제
+- **CI/CD**: 자동화된 빌드 및 릴리스
+
+## Action 입력 파라미터
+
+| 파라미터 | 필수 | 기본값 | 설명 |
+|----------|------|--------|------|
+| `ai_provider` | O | - | AI 프로바이더 (claude/gemini) |
+| `ai_api_key` | O | - | AI API 키 |
+| `github_token` | O | `github.token` | GitHub 토큰 |
+| `ai_model` | X | - | 특정 AI 모델 |
+| `output_dir` | X | `./generated-tests` | 출력 디렉토리 |
+| `test_framework` | X | `auto` | 테스트 프레임워크 |
+| `add_comment` | X | `true` | PR 코멘트 추가 |
+
 ## 진행 상태
 
-- **현재 단계**: Phase 3 - GitHub Actions 통합
+- **현재 단계**: Phase 4 - 테스트 및 문서화
 - **최종 수정일**: 2026-01-12
-- **다음 작업**: GitHub Action 정의 파일 작성
+- **다음 작업**: 단위 테스트 작성
 
 ## 변경 이력
 
@@ -106,3 +133,4 @@ ai-test-helper/
 | 2026-01-12 | 초기 계획 수립 |
 | 2026-01-12 | Phase 1 완료 - 프로젝트 초기 설정 |
 | 2026-01-12 | Phase 2 완료 - 핵심 기능 구현 |
+| 2026-01-12 | Phase 3 완료 - GitHub Actions 통합 |
