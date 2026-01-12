@@ -5,11 +5,13 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
+    "bundle": "ncc build dist/index.js -o dist --source-map --license licenses.txt",
+    "package": "npm run build && npm run bundle",
     "lint": "eslint src --ext .ts",
     "lint:fix": "eslint src --ext .ts --fix",
     "format": "prettier --write \"src/**/*.ts\"",
     "test": "jest",
-    "prepare": "npm run build"
+    "prepare": "npm run package"
   },
   "keywords": [
     "github-actions",
@@ -31,6 +33,7 @@
     "@types/node": "^20.11.0",
     "@typescript-eslint/eslint-plugin": "^7.0.0",
     "@typescript-eslint/parser": "^7.0.0",
+    "@vercel/ncc": "^0.38.4",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.3",
