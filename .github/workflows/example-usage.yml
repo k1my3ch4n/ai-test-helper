@@ -1,0 +1,53 @@
+# Example workflow for using AI Test Helper
+# Copy this file to your project's .github/workflows/ directory
+
+name: AI Test Helper
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  generate-tests:
+    runs-on: ubuntu-latest
+    name: Generate Test Suggestions
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: AI Test Helper
+        uses: your-username/ai-test-helper@v1
+        with:
+          # Required: Choose AI provider (claude or gemini)
+          ai_provider: 'claude'
+
+          # Required: API key for the chosen provider
+          # Store this in GitHub Secrets
+          ai_api_key: ${{ secrets.CLAUDE_API_KEY }}
+
+          # Optional: GitHub token (defaults to github.token)
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+          # Optional: Specific model to use
+          # ai_model: 'claude-sonnet-4-20250514'
+
+          # Optional: Output directory for generated tests
+          output_dir: './generated-tests'
+
+          # Optional: Test framework (jest, mocha, vitest, pytest, junit, auto)
+          test_framework: 'auto'
+
+          # Optional: Add test suggestions as PR comment
+          add_comment: 'true'
+
+      - name: Upload Generated Tests
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-tests
+          path: ./generated-tests/
+          if-no-files-found: ignore
