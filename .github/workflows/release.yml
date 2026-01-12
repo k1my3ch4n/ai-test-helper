@@ -1,0 +1,39 @@
+# Release workflow for GitHub Marketplace
+
+name: Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build and Bundle
+        run: npm run package
+
+      - name: Update major version tag
+        uses: actions/publish-action@v0.3.0
+        with:
+          source-tag: ${{ github.event.release.tag_name }}
+          slack-webhook: ${{ secrets.SLACK_WEBHOOK }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
