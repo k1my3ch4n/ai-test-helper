@@ -6,11 +6,11 @@ GitHub Actions를 이용하여 AI 기반 테스트 코드 작성을 자동화하
 
 ## 작업 단계
 
-### Phase 1: 프로젝트 초기 설정
-- [ ] 프로젝트 구조 설계
-- [ ] package.json 생성 및 기본 의존성 설정
-- [ ] TypeScript 설정
-- [ ] ESLint/Prettier 설정
+### Phase 1: 프로젝트 초기 설정 ✅ 완료
+- [x] 프로젝트 구조 설계
+- [x] package.json 생성 및 기본 의존성 설정
+- [x] TypeScript 설정
+- [x] ESLint/Prettier 설정
 
 ### Phase 2: 핵심 기능 구현
 - [ ] AI API 연동 모듈 개발
@@ -37,23 +37,43 @@ GitHub Actions를 이용하여 AI 기반 테스트 코드 작성을 자동화하
 - [ ] README.md 작성
 - [ ] 사용 예제 문서화
 
-## 기술 스택 (예정)
+## 기술 스택
 
 | 분류 | 기술 | 선택 이유 |
 |------|------|-----------|
 | 언어 | TypeScript | 타입 안정성, GitHub Actions와 호환성 |
 | AI API | Claude/Gemini | 사용자 선택 가능하도록 구현 |
-| 패키지 매니저 | 미정 | 추후 결정 |
-| 테스트 프레임워크 | 미정 | 추후 결정 |
+| 패키지 매니저 | npm | Node.js 기본 패키지 매니저, 안정성 |
+| 테스트 프레임워크 | Jest | TypeScript 지원, 풍부한 기능 |
+| 린터 | ESLint + Prettier | 코드 품질 및 일관성 유지 |
+
+## 프로젝트 구조
+
+```
+ai-test-helper/
+├── src/
+│   ├── index.ts          # 메인 엔트리포인트
+│   ├── api/              # AI API 클라이언트
+│   ├── git/              # Git 변경사항 분석
+│   └── generator/        # 테스트 코드 생성
+├── tests/                # 테스트 파일
+├── dist/                 # 빌드 출력
+├── action.yml            # GitHub Action 정의
+├── package.json
+├── tsconfig.json
+├── .eslintrc.js
+└── .prettierrc
+```
 
 ## 진행 상태
 
-- **현재 단계**: Phase 1 - 프로젝트 초기 설정
+- **현재 단계**: Phase 2 - 핵심 기능 구현
 - **최종 수정일**: 2026-01-12
-- **다음 작업**: 프로젝트 구조 설계 및 의존성 설치
+- **다음 작업**: AI API 연동 모듈 개발
 
 ## 변경 이력
 
 | 날짜 | 변경 내용 |
 |------|-----------|
 | 2026-01-12 | 초기 계획 수립 |
+| 2026-01-12 | Phase 1 완료 - 프로젝트 초기 설정 |
