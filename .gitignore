@@ -2,7 +2,8 @@
 node_modules/
 
 # Build output
-dist/
+# Note: dist/ is NOT ignored because GitHub Actions requires the bundled files
+# dist/
 
 # IDE
 .idea/
