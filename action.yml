@@ -1,6 +1,6 @@
 name: 'AI Test Helper'
 description: 'AI-powered test code generation for pull requests using Claude or Gemini'
-author: 'AI Test Helper'
+author: 'k1my3ch4n'
 
 branding:
   icon: 'check-circle'
