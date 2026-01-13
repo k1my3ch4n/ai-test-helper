@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Build output
+# Note: dist/ is NOT ignored because GitHub Actions requires the bundled files
+# dist/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
+
+# Logs
+*.log
+npm-debug.log*
+
+# Test coverage
+coverage/
+
+# Cache
+.eslintcache

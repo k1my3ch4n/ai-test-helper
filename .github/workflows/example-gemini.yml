@@ -1,0 +1,37 @@
+# Example workflow using Gemini AI provider
+
+name: AI Test Helper (Gemini)
+
+on:
+  workflow_dispatch:  # 수동 실행만 가능 (예제 파일)
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  generate-tests:
+    runs-on: ubuntu-latest
+    name: Generate Test Suggestions with Gemini
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: AI Test Helper
+        uses: k1my3ch4n/ai-test-helper@v1
+        with:
+          ai_provider: 'gemini'
+          ai_api_key: ${{ secrets.GEMINI_API_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          ai_model: 'gemini-1.5-pro'
+          output_dir: './generated-tests'
+          test_framework: 'jest'
+          add_comment: 'true'
+
+      - name: Upload Generated Tests
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-tests
+          path: ./generated-tests/
+          if-no-files-found: ignore
