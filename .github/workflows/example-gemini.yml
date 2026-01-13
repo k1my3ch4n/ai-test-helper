@@ -3,8 +3,7 @@
 name: AI Test Helper (Gemini)
 
 on:
-  pull_request:
-    types: [opened, synchronize, reopened]
+  workflow_dispatch:  # 수동 실행만 가능 (예제 파일)
 
 permissions:
   contents: read

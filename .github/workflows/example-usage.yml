@@ -4,8 +4,7 @@
 name: AI Test Helper
 
 on:
-  pull_request:
-    types: [opened, synchronize, reopened]
+  workflow_dispatch:  # 수동 실행만 가능 (예제 파일)
 
 permissions:
   contents: read
