@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: AI Test Helper
-        uses: your-username/ai-test-helper@v1
+        uses: k1my3ch4n/ai-test-helper@v1
         with:
           # Required: Choose AI provider (claude or gemini)
           ai_provider: 'claude'

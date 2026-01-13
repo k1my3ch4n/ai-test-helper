@@ -6,7 +6,7 @@ Thank you for your interest in contributing to AI Test Helper!
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/ai-test-helper.git
+   git clone https://github.com/k1my3ch4n/ai-test-helper.git
    cd ai-test-helper
    ```
 

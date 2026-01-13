@@ -28,7 +28,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: AI Test Helper
-        uses: your-username/ai-test-helper@v1
+        uses: k1my3ch4n/ai-test-helper@v1
         with:
           ai_provider: 'claude'
           ai_api_key: ${{ secrets.CLAUDE_API_KEY }}
@@ -39,7 +39,7 @@ jobs:
 
 ```yaml
 - name: AI Test Helper
-  uses: your-username/ai-test-helper@v1
+  uses: k1my3ch4n/ai-test-helper@v1
   with:
     ai_provider: 'gemini'
     ai_api_key: ${{ secrets.GEMINI_API_KEY }}
@@ -86,7 +86,7 @@ jobs:
 
 ```yaml
 - name: AI Test Helper
-  uses: your-username/ai-test-helper@v1
+  uses: k1my3ch4n/ai-test-helper@v1
   with:
     ai_provider: 'claude'
     ai_api_key: ${{ secrets.CLAUDE_API_KEY }}
@@ -102,7 +102,7 @@ jobs:
 ```yaml
 - name: AI Test Helper
   id: test-helper
-  uses: your-username/ai-test-helper@v1
+  uses: k1my3ch4n/ai-test-helper@v1
   with:
     ai_provider: 'gemini'
     ai_api_key: ${{ secrets.GEMINI_API_KEY }}
@@ -123,7 +123,7 @@ jobs:
 ```yaml
 - name: AI Test Helper
   id: test-helper
-  uses: your-username/ai-test-helper@v1
+  uses: k1my3ch4n/ai-test-helper@v1
   with:
     ai_provider: 'claude'
     ai_api_key: ${{ secrets.CLAUDE_API_KEY }}
@@ -276,7 +276,7 @@ ai-test-helper/
 ### 설치
 
 ```bash
-git clone https://github.com/your-username/ai-test-helper.git
+git clone https://github.com/k1my3ch4n/ai-test-helper.git
 cd ai-test-helper
 npm install
 ```
