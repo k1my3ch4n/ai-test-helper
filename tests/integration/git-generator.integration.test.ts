@@ -8,9 +8,9 @@ describe('Git + Generator 통합 테스트', () => {
   let testGenerator: TestGenerator;
 
   const mockSuggestions: TestSuggestion[] = [
-    { description: 'userService의 로그인 기능 테스트', priority: 'high', type: 'unit' },
-    { description: 'userService의 에러 처리 테스트', priority: 'medium', type: 'unit' },
-    { description: 'API 엔드포인트 통합 테스트', priority: 'low', type: 'integration' },
+    { description: 'userService의 로그인 기능 테스트', priority: 'high', type: 'unit', codeExample: 'it("로그인이 성공해야 한다", async () => {\n  const result = await userService.login("test@test.com", "password");\n  expect(result).toBeDefined();\n});' },
+    { description: 'userService의 에러 처리 테스트', priority: 'medium', type: 'unit', codeExample: 'it("잘못된 비밀번호로 로그인 실패해야 한다", async () => {\n  await expect(userService.login("test@test.com", "wrong")).rejects.toThrow();\n});' },
+    { description: 'API 엔드포인트 통합 테스트', priority: 'low', type: 'integration', codeExample: 'it("POST /login 엔드포인트가 올바르게 응답해야 한다", async () => {\n  const response = await request(app).post("/login");\n  expect(response.status).toBe(200);\n});' },
   ];
 
   const mockGeneratedTest: GeneratedTest = {

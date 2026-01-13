@@ -19,6 +19,7 @@ export interface TestSuggestion {
   description: string;
   priority: 'high' | 'medium' | 'low';
   type: 'unit' | 'integration' | 'e2e';
+  codeExample: string;
 }
 
 /**
