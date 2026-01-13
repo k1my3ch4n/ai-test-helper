@@ -37,10 +37,10 @@ new file mode 100644
 `;
 
     const mockSuggestions: TestSuggestion[] = [
-      { description: 'jwt 토큰 생성 기능 테스트', priority: 'high', type: 'unit' },
-      { description: 'jwt 토큰 검증 기능 테스트', priority: 'high', type: 'unit' },
-      { description: '로그인 API 엔드포인트 테스트', priority: 'high', type: 'integration' },
-      { description: '인증 미들웨어 테스트', priority: 'medium', type: 'unit' },
+      { description: 'jwt 토큰 생성 기능 테스트', priority: 'high', type: 'unit', codeExample: 'it("유효한 토큰을 생성해야 한다", () => {\n  const token = generateToken({ userId: 1 });\n  expect(token).toBeDefined();\n});' },
+      { description: 'jwt 토큰 검증 기능 테스트', priority: 'high', type: 'unit', codeExample: 'it("유효한 토큰을 검증해야 한다", () => {\n  const payload = verifyToken(token);\n  expect(payload.userId).toBe(1);\n});' },
+      { description: '로그인 API 엔드포인트 테스트', priority: 'high', type: 'integration', codeExample: 'it("로그인 성공 시 토큰을 반환해야 한다", async () => {\n  const res = await request(app).post("/login");\n  expect(res.body.token).toBeDefined();\n});' },
+      { description: '인증 미들웨어 테스트', priority: 'medium', type: 'unit', codeExample: 'it("유효한 토큰으로 요청 시 next()를 호출해야 한다", () => {\n  authMiddleware(req, res, next);\n  expect(next).toHaveBeenCalled();\n});' },
     ];
 
     beforeEach(() => {
@@ -221,7 +221,7 @@ new file mode 100644
   describe('출력 결과 형식', () => {
     it('GitHub Action 출력 형식으로 결과를 생성해야 한다', async () => {
       const mockSuggestions: TestSuggestion[] = [
-        { description: '기능 테스트', priority: 'high', type: 'unit' },
+        { description: '기능 테스트', priority: 'high', type: 'unit', codeExample: 'it("기능이 동작해야 한다", () => { expect(true).toBe(true); });' },
       ];
 
       const mockGeneratedTests: GeneratedTest[] = [
@@ -270,9 +270,9 @@ new file mode 100644
   describe('PR 코멘트 형식', () => {
     it('테스트 제안을 마크다운 형식으로 생성해야 한다', () => {
       const suggestions: TestSuggestion[] = [
-        { description: 'JWT 토큰 생성 테스트', priority: 'high', type: 'unit' },
-        { description: '로그인 API 테스트', priority: 'medium', type: 'integration' },
-        { description: '에러 처리 테스트', priority: 'low', type: 'unit' },
+        { description: 'JWT 토큰 생성 테스트', priority: 'high', type: 'unit', codeExample: 'it("토큰 생성", () => {});' },
+        { description: '로그인 API 테스트', priority: 'medium', type: 'integration', codeExample: 'it("로그인", () => {});' },
+        { description: '에러 처리 테스트', priority: 'low', type: 'unit', codeExample: 'it("에러", () => {});' },
       ];
 
       const suggestionList = suggestions

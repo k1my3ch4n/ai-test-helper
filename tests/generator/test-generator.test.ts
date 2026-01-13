@@ -192,9 +192,9 @@ describe('TestGenerator - 순수 함수', () => {
 
     it('파일과 관련된 제안만 필터링해야 한다', () => {
       const suggestions: TestSuggestion[] = [
-        { description: 'Test app module', priority: 'high', type: 'unit' },
-        { description: 'Test utils helper', priority: 'medium', type: 'unit' },
-        { description: 'Test app error handling', priority: 'low', type: 'unit' },
+        { description: 'Test app module', priority: 'high', type: 'unit', codeExample: 'it("should work", () => {})' },
+        { description: 'Test utils helper', priority: 'medium', type: 'unit', codeExample: 'it("should work", () => {})' },
+        { description: 'Test app error handling', priority: 'low', type: 'unit', codeExample: 'it("should work", () => {})' },
       ];
 
       const result = filterSuggestionsForFile(suggestions, 'src/app.ts');
@@ -206,8 +206,8 @@ describe('TestGenerator - 순수 함수', () => {
 
     it('일치하는 제안이 없으면 빈 배열을 반환해야 한다', () => {
       const suggestions: TestSuggestion[] = [
-        { description: 'Test user authentication', priority: 'high', type: 'unit' },
-        { description: 'Test API endpoints', priority: 'medium', type: 'integration' },
+        { description: 'Test user authentication', priority: 'high', type: 'unit', codeExample: 'it("should work", () => {})' },
+        { description: 'Test API endpoints', priority: 'medium', type: 'integration', codeExample: 'it("should work", () => {})' },
       ];
 
       const result = filterSuggestionsForFile(suggestions, 'src/something.ts');
