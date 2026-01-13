@@ -49,11 +49,7 @@ export class TestGenerator {
 
     for (const file of codeFiles) {
       try {
-        const fileResult = await this.generateTestForFile(
-          file,
-          result.suggestions,
-          getFileContent
-        );
+        const fileResult = await this.generateTestForFile(file, result.suggestions, getFileContent);
 
         if (fileResult.generatedTest) {
           result.generatedTests.push(fileResult.generatedTest);
@@ -251,14 +247,7 @@ export class TestGenerator {
    * 테스트 파일인지 확인
    */
   private isTestFile(filename: string): boolean {
-    const testPatterns = [
-      /\.test\./,
-      /\.spec\./,
-      /_test\./,
-      /Test\./,
-      /__tests__\//,
-      /tests?\//,
-    ];
+    const testPatterns = [/\.test\./, /\.spec\./, /_test\./, /Test\./, /__tests__\//, /tests?\//];
 
     return testPatterns.some((pattern) => pattern.test(filename));
   }

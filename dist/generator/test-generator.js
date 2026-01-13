@@ -236,14 +236,7 @@ class TestGenerator {
      * 테스트 파일인지 확인
      */
     isTestFile(filename) {
-        const testPatterns = [
-            /\.test\./,
-            /\.spec\./,
-            /_test\./,
-            /Test\./,
-            /__tests__\//,
-            /tests?\//,
-        ];
+        const testPatterns = [/\.test\./, /\.spec\./, /_test\./, /Test\./, /__tests__\//, /tests?\//];
         return testPatterns.some((pattern) => pattern.test(filename));
     }
     /**

@@ -531,14 +531,7 @@ class TestGenerator {
      * 테스트 파일인지 확인
      */
     isTestFile(filename) {
-        const testPatterns = [
-            /\.test\./,
-            /\.spec\./,
-            /_test\./,
-            /Test\./,
-            /__tests__\//,
-            /tests?\//,
-        ];
+        const testPatterns = [/\.test\./, /\.spec\./, /_test\./, /Test\./, /__tests__\//, /tests?\//];
         return testPatterns.some((pattern) => pattern.test(filename));
     }
     /**
@@ -643,6 +636,7 @@ class GitAnalyzer {
         const changedFiles = [];
         let page = 1;
         const perPage = 100;
+        // eslint-disable-next-line no-constant-condition
         while (true) {
             const { data: files } = await this.octokit.rest.pulls.listFiles({
                 owner: this.owner,

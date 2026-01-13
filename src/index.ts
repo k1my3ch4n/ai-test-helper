@@ -86,7 +86,10 @@ async function run(): Promise<void> {
 
     // 11. 출력 설정
     core.setOutput('suggestions', JSON.stringify(testResult.suggestions));
-    core.setOutput('generated_tests', JSON.stringify(testResult.generatedTests.map((t) => t.fileName)));
+    core.setOutput(
+      'generated_tests',
+      JSON.stringify(testResult.generatedTests.map((t) => t.fileName))
+    );
     core.setOutput('success', testResult.success.toString());
 
     if (testResult.errors.length > 0) {

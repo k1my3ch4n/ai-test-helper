@@ -70,6 +70,7 @@ class GitAnalyzer {
         const changedFiles = [];
         let page = 1;
         const perPage = 100;
+        // eslint-disable-next-line no-constant-condition
         while (true) {
             const { data: files } = await this.octokit.rest.pulls.listFiles({
                 owner: this.owner,
