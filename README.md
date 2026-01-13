@@ -5,7 +5,8 @@ GitHub Actions를 이용하여 AI 기반으로 테스트 코드를 자동 생성
 ## 주요 기능
 
 - **AI 기반 코드 분석**: Claude 또는 Gemini API를 사용하여 변경된 코드 분석
-- **테스트 제안 생성**: 테스트해야 할 항목 목록을 우선순위와 함께 제공
+- **테스트 제안 생성**: 테스트해야 할 항목 목록을 우선순위와 함께 **한글로** 제공
+- **테스트 코드 예시 제공**: 각 테스트 제안에 대한 **구체적인 테스트 코드 예시** 포함
 - **테스트 코드 자동 생성**: 다양한 프로그래밍 언어에 대한 테스트 코드 생성
 - **PR 코멘트**: 테스트 제안을 PR에 자동으로 코멘트
 - **다양한 테스트 프레임워크 지원**: Jest, Mocha, Vitest, Pytest, JUnit 등
@@ -65,6 +66,27 @@ jobs:
 | `suggestions` | 테스트 제안 JSON 배열 |
 | `generated_tests` | 생성된 테스트 파일명 JSON 배열 |
 | `success` | 테스트 생성 성공 여부 |
+
+### 테스트 제안 예시
+
+테스트 제안은 한글로 제공되며, 각 제안에는 테스트 코드 예시가 포함됩니다:
+
+```json
+[
+  {
+    "description": "사용자 로그인 기능이 올바르게 동작하는지 테스트",
+    "priority": "high",
+    "type": "unit",
+    "codeExample": "it('유효한 사용자 정보로 로그인 성공해야 한다', async () => {\n  const result = await userService.login('test@test.com', 'password');\n  expect(result.token).toBeDefined();\n});"
+  },
+  {
+    "description": "잘못된 비밀번호로 로그인 시 에러 처리 테스트",
+    "priority": "high",
+    "type": "unit",
+    "codeExample": "it('잘못된 비밀번호로 로그인 시 에러를 던져야 한다', async () => {\n  await expect(userService.login('test@test.com', 'wrong')).rejects.toThrow('Invalid credentials');\n});"
+  }
+]
+```
 
 ## 지원 언어
 
