@@ -13,20 +13,22 @@ export class ClaudeClient implements AIClient {
   }
 
   async analyzeChanges(diff: string, context?: string): Promise<TestSuggestion[]> {
-    const systemPrompt = `You are a test engineering expert. Analyze the code changes and suggest what should be tested.
-Return your response as a JSON array of test suggestions with the following format:
+    const systemPrompt = `당신은 테스트 엔지니어링 전문가입니다. 코드 변경사항을 분석하고 테스트해야 할 항목을 제안해주세요.
+반드시 한글로 응답하고, 다음 JSON 형식의 배열로 반환해주세요:
 [
   {
-    "description": "Description of what to test",
+    "description": "테스트해야 할 내용에 대한 설명 (한글로 작성)",
     "priority": "high" | "medium" | "low",
-    "type": "unit" | "integration" | "e2e"
+    "type": "unit" | "integration" | "e2e",
+    "codeExample": "// 테스트 코드 예시\\ndescribe('테스트 스위트', () => {\\n  it('테스트 케이스', () => {\\n    // 테스트 로직\\n  });\\n});"
   }
 ]
-Only return the JSON array, no additional text.`;
+codeExample에는 해당 테스트를 구현하기 위한 간단한 테스트 코드 예시를 포함해주세요.
+JSON 배열만 반환하고 다른 텍스트는 포함하지 마세요.`;
 
-    const userPrompt = `Analyze the following code changes and suggest tests:
+    const userPrompt = `다음 코드 변경사항을 분석하고 테스트 제안을 해주세요:
 
-${context ? `Context:\n${context}\n\n` : ''}Code Changes (diff):
+${context ? `컨텍스트:\n${context}\n\n` : ''}코드 변경사항 (diff):
 ${diff}`;
 
     const response = await this.client.messages.create({
