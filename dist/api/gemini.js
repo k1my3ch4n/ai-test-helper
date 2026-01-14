@@ -12,18 +12,27 @@ class GeminiClient {
     }
     async analyzeChanges(diff, context) {
         const model = this.client.getGenerativeModel({ model: this.model });
-        const prompt = `You are a test engineering expert. Analyze the code changes and suggest what should be tested.
-Return your response as a JSON array of test suggestions with the following format:
+        const prompt = `당신은 테스트 엔지니어링 전문가입니다. 코드 변경사항을 분석하고 테스트해야 할 항목을 제안해주세요.
+
+**중요: 모든 응답은 반드시 한국어(Korean)로 작성해야 합니다. 영어로 작성하지 마세요.**
+
+다음 JSON 형식의 배열로 반환해주세요:
 [
   {
-    "description": "Description of what to test",
+    "description": "테스트해야 할 내용에 대한 설명 (반드시 한글로 작성)",
     "priority": "high" | "medium" | "low",
-    "type": "unit" | "integration" | "e2e"
+    "type": "unit" | "integration" | "e2e",
+    "codeExample": "// 실제 구현 가능한 테스트 코드 예시 (한글 주석 포함)"
   }
 ]
-Only return the JSON array, no additional text.
 
-${context ? `Context:\n${context}\n\n` : ''}Code Changes (diff):
+**필수 요구사항:**
+1. description은 반드시 한글로 작성 (예: "사용자 로그인 기능이 정상 동작하는지 확인")
+2. codeExample에는 실제 실행 가능한 테스트 코드를 포함 (Jest/Vitest 형식)
+3. codeExample의 주석과 테스트 설명도 한글로 작성
+4. JSON 배열만 반환하고 다른 텍스트는 포함하지 마세요
+
+${context ? `컨텍스트:\n${context}\n\n` : ''}코드 변경사항 (diff):
 ${diff}`;
         const result = await model.generateContent(prompt);
         const response = result.response;
