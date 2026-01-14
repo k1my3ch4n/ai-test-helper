@@ -17,6 +17,7 @@ export interface TestSuggestion {
     description: string;
     priority: 'high' | 'medium' | 'low';
     type: 'unit' | 'integration' | 'e2e';
+    codeExample: string;
 }
 /**
  * 생성된 테스트 코드
