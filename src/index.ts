@@ -118,18 +118,24 @@ async function run(): Promise<void> {
 async function addPRComment(
   token: string,
   prNumber: number,
-  suggestions: Array<{ description: string; priority: string; type: string }>
+  suggestions: Array<{ description: string; priority: string; type: string; codeExample?: string }>
 ): Promise<void> {
   const octokit = github.getOctokit(token);
   const context = github.context;
 
   const suggestionList = suggestions
-    .map((s) => `- **[${s.priority.toUpperCase()}]** (${s.type}) ${s.description}`)
-    .join('\n');
+    .map((s) => {
+      let item = `### **[${s.priority.toUpperCase()}]** (${s.type}) ${s.description}`;
+      if (s.codeExample) {
+        item += `\n\n<details>\n<summary>테스트 코드 예시</summary>\n\n\`\`\`typescript\n${s.codeExample}\n\`\`\`\n\n</details>`;
+      }
+      return item;
+    })
+    .join('\n\n');
 
-  const body = `## AI Test Helper - Test Suggestions
+  const body = `## AI Test Helper - 테스트 제안
 
-The following tests are suggested for this PR:
+이 PR에 대해 다음 테스트들이 제안되었습니다:
 
 ${suggestionList}
 
